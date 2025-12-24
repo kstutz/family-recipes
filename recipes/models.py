@@ -1,0 +1,43 @@
+from django.db import models
+
+
+class Recipe(models.Model):
+    recipe_name = models.CharField(max_length=200)
+    source = models.CharField(max_length=200,blank=True, null=True)
+    preparation_time = models.CharField(max_length=100)
+    cooking_time = models.CharField(max_length=100, blank=True, null=True)
+    notes = models.TextField(blank=True, null=True)
+    
+    def __str__(self):
+        return self.recipe_name
+
+
+class Location(models.Model):
+    location_name = models.CharField(max_length=200)
+    
+    def __str__(self):
+        return self.location_name
+
+
+class Ingredient(models.Model):
+    ingredient_name = models.CharField(max_length=200)
+    location = models.ForeignKey(Location, on_delete=models.SET_NULL, blank=True, null=True)
+
+    def __str__(self):
+        return self.ingredient_name
+
+
+class IngredientInRecipe(models.Model):
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    quantity = models.CharField(max_length=200)
+    unit = models.CharField(max_length=100)
+    alternatives = models.CharField(max_length=200, blank=True, null=True)
+    
+    
+class Instruction(models.Model):
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    step_number = models.IntegerField()
+    instruction_text = models.TextField()
+    
+    

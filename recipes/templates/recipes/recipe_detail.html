@@ -1,0 +1,14 @@
+<h1> {{ recipe }} </h1>
+
+Quelle: {{ recipe.source }} <br>
+Vorbereitungszeit: {{ recipe.preparation_time }} <br>
+Kochzeit: {{ recipe.cooking_time }} <br>
+Anmerkungen: {{ recipe.notes }} <br>
+
+<h2> Zutaten: </h2>
+<ul>
+    {% for ingredient in ingredients %}
+        <li> {{ ingredient.quantity }} of {{ ingredient.ingredient_name }} </li>
+    {% endfor %}
+</ul>
+
