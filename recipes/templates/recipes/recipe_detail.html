@@ -5,14 +5,21 @@ Vorbereitungszeit: {{ recipe.preparation_time }} <br>
 Kochzeit: {{ recipe.cooking_time }} <br>
 Anmerkungen: {{ recipe.notes }} <br>
 
-<h2> Zutaten: </h2>
+<h2> Zutaten</h2>
 <ul>
     {% for ingredient in ingredients %}
         <li> {{ ingredient.quantity }} {{ ingredient.unit }} {{ ingredient.ingredient.ingredient_name }} </li>
     {% endfor %}
 </ul>
 
-<h2> Zubereitung: </h2>
+<h2>Utensilien</h2>
+<ul>
+    {% for utensil in utensils %}
+        <li> {{ utensil.utensil.utensil_name }} </li>
+    {% endfor %}
+</ul>
+
+<h2> Zubereitung</h2>
 <ol>
     {% for instruction in instructions %}
         <li> {{ instruction.text }} </li>
