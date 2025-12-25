@@ -8,6 +8,13 @@ Anmerkungen: {{ recipe.notes }} <br>
 <h2> Zutaten: </h2>
 <ul>
     {% for ingredient in ingredients %}
-        <li> {{ ingredient.quantity }} of {{ ingredient.ingredient_name }} </li>
+        <li> {{ ingredient.quantity }} {{ ingredient.unit }} {{ ingredient.ingredient.ingredient_name }} </li>
     {% endfor %}
 </ul>
+
+<h2> Zubereitung: </h2>
+<ol>
+    {% for instruction in instructions %}
+        <li> {{ instruction.text }} </li>
+    {% endfor %}
+</ol>

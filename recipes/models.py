@@ -38,6 +38,6 @@ class IngredientInRecipe(models.Model):
 class Instruction(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     step_number = models.IntegerField()
-    instruction_text = models.TextField()
+    text = models.TextField()
     
     

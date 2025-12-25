@@ -1,5 +1,5 @@
 from django.views import generic
-from .models import Recipe
+from .models import Recipe, IngredientInRecipe
 
 
 class IndexView(generic.ListView):
@@ -11,3 +11,9 @@ class IndexView(generic.ListView):
 
 class DetailView(generic.DetailView):
     model = Recipe
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['ingredients'] = IngredientInRecipe.objects.filter(recipe=self.object)
+        context['instructions'] = self.object.instruction_set.order_by('step_number')
+        return context
