@@ -1,7 +1,7 @@
 from django.contrib import admin
 import nested_admin
 
-from .models import Recipe, Step, Ingredient, Location, RecipeUtensil, Utensil, StepIngredient
+from .models import Recipe, Step, Ingredient, Location, RecipeUtensil, Utensil, StepIngredient, StepInstruction
 
 
 class StepIngredientInline(nested_admin.NestedStackedInline):
@@ -9,10 +9,15 @@ class StepIngredientInline(nested_admin.NestedStackedInline):
     extra = 1
 
 
+class StepInstructionInline(nested_admin.NestedStackedInline):
+    model = StepInstruction
+    extra = 1
+    
+    
 class StepInline(nested_admin.NestedStackedInline):
     model = Step
     extra = 1
-    inlines = [StepIngredientInline]
+    inlines = [StepIngredientInline, StepInstructionInline]
 
     
 class UtensilInline(nested_admin.NestedStackedInline):

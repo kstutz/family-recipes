@@ -23,7 +23,6 @@ Anmerkungen: {{ recipe.notes }} <br>
 <ol>
     {% for step in steps %}
         <li>
-            {{ step.instruction }}
             {% if step.ingredients %}
                 <ul>
                     {% for ingredient in step.ingredients %}
@@ -31,6 +30,12 @@ Anmerkungen: {{ recipe.notes }} <br>
                     {% endfor %}
                 </ul>
             {% endif %}
+            <ul>
+            {% for instruction in step.instructions %}
+                <li> {{ instruction.instruction_text }} </li>
+            {% endfor %}
+            </ul>
+
         </li>
     {% endfor %}
 </ol>
