@@ -21,7 +21,16 @@ Anmerkungen: {{ recipe.notes }} <br>
 
 <h2> Zubereitung</h2>
 <ol>
-    {% for instruction in instructions %}
-        <li> {{ instruction.text }} </li>
+    {% for step in steps %}
+        <li>
+            {{ step.instruction }}
+            {% if step.ingredients %}
+                <ul>
+                    {% for ingredient in step.ingredients %}
+                        <li>{{ ingredient.quantity }} {{ ingredient.unit }} {{ ingredient.ingredient.ingredient_name }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
     {% endfor %}
 </ol>
