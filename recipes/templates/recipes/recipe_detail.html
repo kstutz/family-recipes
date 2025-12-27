@@ -20,22 +20,18 @@ Anmerkungen: {{ recipe.notes }} <br>
 </ul>
 
 <h2> Zubereitung</h2>
-<ol>
-    {% for step in steps %}
-        <li>
-            {% if step.ingredients %}
-                <ul>
-                    {% for ingredient in step.ingredients %}
-                        <li>{{ ingredient.quantity }} {{ ingredient.unit }} {{ ingredient.ingredient.ingredient_name }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-            <ul>
-            {% for instruction in step.instructions %}
-                <li> {{ instruction.instruction_text }} </li>
+{% for step in steps %}
+    {% if step.ingredients %}
+        <ul>
+            {% for ingredient in step.ingredients %}
+                <li>{{ ingredient.quantity }} {{ ingredient.unit }} {{ ingredient.ingredient.ingredient_name }}</li>
             {% endfor %}
-            </ul>
+        </ul>
+    {% endif %}
+    <ol>
+        {% for instruction in step.instructions %}
+            <li> {{ instruction.text }} </li>
+        {% endfor %}
+    </ol>
 
-        </li>
-    {% endfor %}
-</ol>
+{% endfor %}

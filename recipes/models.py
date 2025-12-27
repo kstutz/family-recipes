@@ -30,22 +30,14 @@ class Utensil(models.Model):
         return self.utensil_name
    
    
-class Instruction(models.Model):
-    instruction_text = models.TextField()
-    
-    def __str__(self):
-        return self.instruction_text[:50]
-
-
 class Step(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     number = models.IntegerField(validators=[MinValueValidator(0)])
 
-
-class StepInstruction(models.Model):
+    
+class Instruction(models.Model):
     step = models.ForeignKey(Step, on_delete=models.CASCADE)
-    instruction = models.ForeignKey(Instruction, on_delete=models.CASCADE)
-    number = models.IntegerField(validators=[MinValueValidator(0)])
+    text = models.CharField(max_length=400)
     
     
 class RecipeUtensil(models.Model):
@@ -68,12 +60,7 @@ class StepIngredient(models.Model):
     unit = models.CharField(max_length=100)
     alternatives = models.CharField(max_length=200, blank=True, null=True)
 
-
-#class IngredientInRecipe(models.Model):
-#    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-#    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-#    quantity = models.CharField(max_length=200)
-#    unit = models.CharField(max_length=100)
-#    alternatives = models.CharField(max_length=200, blank=True, null=True)
+    def __str__(self):
+        return self.ingredient.ingredient_name
 
     

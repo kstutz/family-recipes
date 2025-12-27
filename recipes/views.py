@@ -1,5 +1,5 @@
 from django.views import generic
-from .models import Recipe, StepIngredient, RecipeUtensil
+from .models import Recipe, StepIngredient, RecipeUtensil, Instruction
 
 
 class IndexView(generic.ListView):
@@ -17,7 +17,7 @@ class DetailView(generic.DetailView):
         steps = self.object.step_set.order_by('number')
         for step in steps:
             step.ingredients = StepIngredient.objects.filter(step=step)
-            step.instructions = step.stepinstruction_set.order_by('number')
+            step.instructions = step.instruction_set.order_by('id')
         context['steps'] = steps
 #        context['instructions'] = self.object.instruction_set.order_by('step_number')
 #        context['utensils'] = self.object.recipeutensil_set.all()
