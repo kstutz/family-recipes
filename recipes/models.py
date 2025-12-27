@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator
 from django.db import models
 
 
@@ -7,6 +8,8 @@ class Recipe(models.Model):
     preparation_time = models.CharField(max_length=100)
     cooking_time = models.CharField(max_length=100, blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
+    experimental = models.BooleanField(default=False)
+    sweet = models.BooleanField(default=False)
     
     def __str__(self):
         return self.recipe_name
@@ -25,6 +28,16 @@ class Utensil(models.Model):
     
     def __str__(self):
         return self.utensil_name
+   
+   
+class Step(models.Model):
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    number = models.IntegerField(validators=[MinValueValidator(0)])
+
+    
+class Instruction(models.Model):
+    step = models.ForeignKey(Step, on_delete=models.CASCADE)
+    text = models.CharField(max_length=400)
     
     
 class RecipeUtensil(models.Model):
@@ -40,17 +53,14 @@ class Ingredient(models.Model):
         return self.ingredient_name
 
 
-class IngredientInRecipe(models.Model):
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+class StepIngredient(models.Model):
+    step = models.ForeignKey(Step, on_delete=models.CASCADE)
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
     quantity = models.CharField(max_length=200)
     unit = models.CharField(max_length=100)
     alternatives = models.CharField(max_length=200, blank=True, null=True)
-    
-    
-class Instruction(models.Model):
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-    step_number = models.IntegerField()
-    text = models.TextField()
-    
+
+    def __str__(self):
+        return self.ingredient.ingredient_name
+
     

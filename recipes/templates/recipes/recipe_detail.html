@@ -4,24 +4,41 @@ Quelle: {{ recipe.source }} <br>
 Vorbereitungszeit: {{ recipe.preparation_time }} <br>
 Kochzeit: {{ recipe.cooking_time }} <br>
 Anmerkungen: {{ recipe.notes }} <br>
+Süß: {{ recipe.sweet }} <br>
+Noch in Erprobung: {{ recipe.experimental }}
 
 <h2> Zutaten</h2>
 <ul>
-    {% for ingredient in ingredients %}
-        <li> {{ ingredient.quantity }} {{ ingredient.unit }} {{ ingredient.ingredient.ingredient_name }} </li>
+    {% for step in steps %}
+        {% for step_ingredient in step.ingredients %}
+            <li>{{ step_ingredient.quantity }} {{ step_ingredient.unit }} {{ step_ingredient.ingredient.ingredient_name }}
+                &nbsp; - &nbsp; {{ step_ingredient.ingredient.location.location_name}}</li>
+        {% endfor %}
     {% endfor %}
 </ul>
 
-<h2>Utensilien</h2>
-<ul>
-    {% for utensil in utensils %}
-        <li> {{ utensil.utensil.utensil_name }} </li>
-    {% endfor %}
-</ul>
+{% if utensils %}
+    <h2>Utensilien</h2>
+    <ul>
+        {% for utensil in utensils %}
+            <li> {{ utensil.utensil.utensil_name }} </li>
+        {% endfor %}
+    </ul>
+{% endif %}
 
 <h2> Zubereitung</h2>
-<ol>
-    {% for instruction in instructions %}
-        <li> {{ instruction.text }} </li>
-    {% endfor %}
-</ol>
+{% for step in steps %}
+    {% if step.ingredients %}
+        <ul>
+            {% for ingredient in step.ingredients %}
+                <li>{{ ingredient.quantity }} {{ ingredient.unit }} {{ ingredient.ingredient.ingredient_name }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <ol>
+        {% for instruction in step.instructions %}
+            <li> {{ instruction.text }} </li>
+        {% endfor %}
+    </ol>
+
+{% endfor %}
