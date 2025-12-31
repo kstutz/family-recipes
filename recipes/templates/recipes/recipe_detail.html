@@ -21,7 +21,9 @@ Noch in Erprobung: {{ recipe.experimental }}
     <h2>Utensilien</h2>
     <ul>
         {% for utensil in utensils %}
-            <li> {{ utensil.utensil.utensil_name }} </li>
+            <li> {{ utensil.utensil.utensil_name }} -
+                <a href="{% url 'location' utensil.utensil.location.id %}">Wo?</a>
+            </li>
         {% endfor %}
     </ul>
 {% endif %}
@@ -42,3 +44,5 @@ Noch in Erprobung: {{ recipe.experimental }}
     </ol>
 
 {% endfor %}
+
+<a href="{% url 'index' %}">Zurück zur Rezeptübersicht</a>

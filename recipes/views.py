@@ -1,12 +1,12 @@
 from django.views import generic
-from .models import Recipe, StepIngredient, RecipeUtensil, Instruction
+from .models import Recipe, StepIngredient, RecipeUtensil, Location
 
 
 class IndexView(generic.ListView):
     template_name = "recipes/index.html"
 
     def get_queryset(self):
-        return Recipe.objects.order_by("recipe_name")[:5]
+        return Recipe.objects.order_by("recipe_name")
 
 
 class DetailView(generic.DetailView):
@@ -23,3 +23,9 @@ class DetailView(generic.DetailView):
 #        context['utensils'] = self.object.recipeutensil_set.all()
         context['utensils'] = RecipeUtensil.objects.filter(recipe=self.object)
         return context
+
+
+class LocationView(generic.DetailView):
+    model = Location
+    template_name = "recipes/location.html"
+    
