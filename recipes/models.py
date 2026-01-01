@@ -4,10 +4,10 @@ from django.db import models
 
 class Recipe(models.Model):
     recipe_name = models.CharField(max_length=200)
-    source = models.CharField(max_length=200,blank=True, null=True)
+    source = models.CharField(max_length=200,blank=True)
     preparation_time = models.CharField(max_length=100)
-    cooking_time = models.CharField(max_length=100, blank=True, null=True)
-    notes = models.TextField(blank=True, null=True)
+    cooking_time = models.CharField(max_length=100, blank=True)
+    notes = models.TextField(blank=True)
     experimental = models.BooleanField(default=False)
     sweet = models.BooleanField(default=False)
     
@@ -16,7 +16,7 @@ class Recipe(models.Model):
     
 
 class Location(models.Model):
-    location_name = models.CharField(max_length=200)
+    location_name = models.CharField(max_length=200, unique=True)
     image = models.ImageField(upload_to="images", null=True)
     
     def __str__(self):
@@ -24,9 +24,9 @@ class Location(models.Model):
 
 
 class Utensil(models.Model):
-    utensil_name = models.CharField(max_length=200)
+    utensil_name = models.CharField(max_length=200, unique=True)
     location = models.ForeignKey(Location, on_delete=models.SET_NULL, blank=True, null=True)
-    image = models.ImageField(upload_to="images", null=True)
+    image = models.ImageField(upload_to="images", null=True, blank=True)
     
     def __str__(self):
         return self.utensil_name
@@ -48,9 +48,11 @@ class RecipeUtensil(models.Model):
 
 
 class Ingredient(models.Model):
-    ingredient_name = models.CharField(max_length=200)
+    ingredient_name = models.CharField(max_length=200, unique=True)
     location = models.ForeignKey(Location, on_delete=models.SET_NULL, blank=True, null=True)
-    image = models.ImageField(upload_to="images", null=True)
+    image = models.ImageField(upload_to="images", null=True, blank=True)
+    usually_stocked = models.BooleanField(default=True)
+    alternatives = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
         return self.ingredient_name
@@ -61,7 +63,7 @@ class StepIngredient(models.Model):
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
     quantity = models.CharField(max_length=200)
     unit = models.CharField(max_length=100)
-    alternatives = models.CharField(max_length=200, blank=True, null=True)
+    alternatives = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
         return self.ingredient.ingredient_name
