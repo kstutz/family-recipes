@@ -1,0 +1,22 @@
+
+<h1>{{ utensil }}</h1>
+
+{% if utensil.image %}
+    <h3>So sieht es aus: </h3>
+    <img src="{{ utensil.image.url }}" alt="{{ utensil }}" style="max-width: 400px; height: auto;">
+{% else %}
+    Kein Bild hinterlegt
+{% endif %}
+
+<h3>Hier ist es zu finden:</h3>
+{{ utensil.location }}
+<br />
+
+{% if utensil.location.image %}
+    <img src="{{ utensil.location.image.url }}" alt="{{ utensil }}" style="max-width: 400px; height: auto;">
+{% else %}
+    Kein Bild des Lagerorts hinterlegt
+{% endif %}
+
+
+

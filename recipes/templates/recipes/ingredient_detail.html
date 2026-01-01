@@ -1,0 +1,19 @@
+
+<h1>{{ ingredient }}</h1>
+
+{% if ingredient.image %}
+    <h3>So sieht es aus: </h3>
+    <img src="{{ ingredient.image.url }}" alt="{{ ingredient }}" style="max-width: 400px; height: auto;">
+{% else %}
+    Kein Bild hinterlegt
+{% endif %}
+
+<h3>Hier ist es zu finden:</h3>
+{{ ingredient.location }}
+<br />
+
+{% if ingredient.location.image %}
+    <img src="{{ ingredient.location.image.url }}" alt="{{ location }}" style="max-width: 400px; height: auto;">
+{% else %}
+    Kein Bild des Lagerorts hinterlegt
+{% endif %}

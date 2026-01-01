@@ -1,5 +1,5 @@
 from django.views import generic
-from .models import Recipe, StepIngredient, RecipeUtensil, Location
+from .models import Recipe, StepIngredient, RecipeUtensil, Location, Ingredient, Utensil
 
 
 class IndexView(generic.ListView):
@@ -25,7 +25,9 @@ class DetailView(generic.DetailView):
         return context
 
 
-class LocationView(generic.DetailView):
-    model = Location
-    template_name = "recipes/location.html"
-    
+class IngredientView(generic.DetailView):
+    model = Ingredient
+
+
+class UtensilView(generic.DetailView):
+    model = Utensil
