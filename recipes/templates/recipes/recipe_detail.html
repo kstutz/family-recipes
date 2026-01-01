@@ -12,7 +12,9 @@ Noch in Erprobung: {{ recipe.experimental }}
     {% for step in steps %}
         {% for step_ingredient in step.ingredients %}
             <li>{{ step_ingredient.quantity }} {{ step_ingredient.unit }} {{ step_ingredient.ingredient.ingredient_name }}
-                &nbsp; - &nbsp; {{ step_ingredient.ingredient.location.location_name}}</li>
+                &nbsp; - &nbsp;
+                <a href="{% url 'recipes:ingredient' step_ingredient.ingredient.id %}">{{ step_ingredient.ingredient.location.location_name}}</a>
+            </li>
         {% endfor %}
     {% endfor %}
 </ul>
@@ -20,8 +22,10 @@ Noch in Erprobung: {{ recipe.experimental }}
 {% if utensils %}
     <h2>Utensilien</h2>
     <ul>
-        {% for utensil in utensils %}
-            <li> {{ utensil.utensil.utensil_name }} </li>
+        {% for recipe_utensil in utensils %}
+            <li>
+                <a href="{% url 'recipes:utensil' recipe_utensil.utensil.id %}">{{ recipe_utensil.utensil.utensil_name }}</a>
+            </li>
         {% endfor %}
     </ul>
 {% endif %}
@@ -30,8 +34,10 @@ Noch in Erprobung: {{ recipe.experimental }}
 {% for step in steps %}
     {% if step.ingredients %}
         <ul>
-            {% for ingredient in step.ingredients %}
-                <li>{{ ingredient.quantity }} {{ ingredient.unit }} {{ ingredient.ingredient.ingredient_name }}</li>
+            {% for step_ingredient in step.ingredients %}
+                <li>{{ step_ingredient.quantity }} {{ step_ingredient.unit }}
+                    <a href="{% url 'recipes:ingredient' step_ingredient.ingredient.id %}">{{ step_ingredient.ingredient.ingredient_name }}</a>
+                </li>
             {% endfor %}
         </ul>
     {% endif %}
@@ -42,3 +48,5 @@ Noch in Erprobung: {{ recipe.experimental }}
     </ol>
 
 {% endfor %}
+
+<a href="{% url 'recipes:index' %}">Zurück zur Rezeptübersicht</a>
