@@ -12,8 +12,18 @@ Noch in Erprobung: {{ recipe.experimental }}
     {% for step in steps %}
         {% for step_ingredient in step.ingredients %}
             <li>{{ step_ingredient.quantity }} {{ step_ingredient.unit }} {{ step_ingredient.ingredient.ingredient_name }}
+                {% if not step_ingredient.ingredient.usually_stocked %}
+                    <!-- Display a warning sign-->
+                    &nbsp; <span style="color: red;" title="Normalerweise nicht vorrätig.">&#9888;</span>
+                {% endif %}
                 &nbsp; - &nbsp;
                 <a href="{% url 'recipes:ingredient' step_ingredient.ingredient.id %}">{{ step_ingredient.ingredient.location.location_name}}</a>
+                {% if step_ingredient.alternatives != "" %}
+                    &nbsp;
+                    (ersetzbar durch {{ step_ingredient.alternatives }})
+                {% endif %}
+
+
             </li>
         {% endfor %}
     {% endfor %}
