@@ -3,67 +3,68 @@ from django.db import models
 
 
 class Recipe(models.Model):
-    recipe_name = models.CharField(max_length=200)
-    source = models.CharField(max_length=200,blank=True)
-    preparation_time = models.CharField(max_length=100)
-    cooking_time = models.CharField(max_length=100, blank=True)
-    notes = models.TextField(blank=True)
-    experimental = models.BooleanField(default=False)
-    sweet = models.BooleanField(default=False)
+    recipe_name = models.CharField(max_length=200, verbose_name="Rezept")
+    source = models.CharField(max_length=200, verbose_name="Quelle", blank=True)
+    preparation_time = models.CharField(max_length=100, verbose_name="Zubereitungszeit")
+    cooking_time = models.CharField(max_length=100, verbose_name="Koch/Backzeit", blank=True)
+    notes = models.TextField(verbose_name="Anmerkungen", blank=True)
+    experimental = models.BooleanField(verbose_name="Noch in Erprobung", default=False)
+    sweet = models.BooleanField(verbose_name="Süß", default=False)
     
     def __str__(self):
         return self.recipe_name
     
 
 class Location(models.Model):
-    location_name = models.CharField(max_length=200, unique=True)
-    image = models.ImageField(upload_to="images", null=True, blank=True)
+    location_name = models.CharField(max_length=200, verbose_name="Lagerort", unique=True)
+    image = models.ImageField(upload_to="images", verbose_name="Foto", null=True, blank=True)
     
     def __str__(self):
         return self.location_name
 
 
 class Utensil(models.Model):
-    utensil_name = models.CharField(max_length=200, unique=True)
-    location = models.ForeignKey(Location, on_delete=models.SET_NULL, blank=True, null=True)
-    image = models.ImageField(upload_to="images", null=True, blank=True)
+    utensil_name = models.CharField(max_length=200, verbose_name="Utensil", unique=True)
+    location = models.ForeignKey(Location, verbose_name="Lagerort", on_delete=models.SET_NULL, blank=True, null=True)
+    image = models.ImageField(upload_to="images", verbose_name="Foto", null=True, blank=True)
     
     def __str__(self):
         return self.utensil_name
    
    
 class Step(models.Model):
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, verbose_name="Rezept", on_delete=models.CASCADE)
     number = models.IntegerField(validators=[MinValueValidator(0)])
 
     
 class Instruction(models.Model):
-    step = models.ForeignKey(Step, on_delete=models.CASCADE)
-    text = models.CharField(max_length=400)
+    step = models.ForeignKey(Step, verbose_name="Schritt", on_delete=models.CASCADE)
+    text = models.CharField(max_length=400, verbose_name="Text")
     
     
 class RecipeUtensil(models.Model):
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-    utensil = models.ForeignKey(Utensil, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, verbose_name="Rezept", on_delete=models.CASCADE)
+    utensil = models.ForeignKey(Utensil, verbose_name="Utensil", on_delete=models.CASCADE)
 
 
 class Ingredient(models.Model):
-    ingredient_name = models.CharField(max_length=200, unique=True)
-    location = models.ForeignKey(Location, on_delete=models.SET_NULL, blank=True, null=True)
-    image = models.ImageField(upload_to="images", null=True, blank=True)
-    usually_stocked = models.BooleanField(default=True)
-    alternatives = models.CharField(max_length=200, blank=True)
+    ingredient_name = models.CharField(max_length=200, verbose_name="Zutat", unique=True)
+    location1 = models.ForeignKey(Location, verbose_name="Lagerort", related_name="location1", on_delete=models.SET_NULL, blank=True, null=True)
+    location2 = models.ForeignKey(Location, verbose_name="Alternativer Lagerort", related_name="location2", on_delete=models.SET_NULL, blank=True, null=True)
+    image = models.ImageField(upload_to="images", verbose_name="Foto", null=True, blank=True)
+    usually_stocked = models.BooleanField(default=True, verbose_name="normalerweise vorhanden", )
+    alternatives = models.CharField(max_length=200, verbose_name="Mögliche Alternative(n)", blank=True)
 
     def __str__(self):
         return self.ingredient_name
 
 
 class StepIngredient(models.Model):
-    step = models.ForeignKey(Step, on_delete=models.CASCADE)
-    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-    quantity = models.CharField(max_length=200)
-    unit = models.CharField(max_length=100)
-    alternatives = models.CharField(max_length=200, blank=True)
+    step = models.ForeignKey(Step, verbose_name="Schritt", on_delete=models.CASCADE)
+    ingredient = models.ForeignKey(Ingredient, verbose_name="Zutat", on_delete=models.CASCADE)
+    quantity = models.CharField(max_length=200, verbose_name="Menge")
+    unit = models.CharField(max_length=100, verbose_name="Einheit")
+    alternatives = models.CharField(max_length=200, verbose_name="Mögliche Alternative(n)", blank=True)
 
     def __str__(self):
         return self.ingredient.ingredient_name
