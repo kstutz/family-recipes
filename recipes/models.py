@@ -17,7 +17,7 @@ class Recipe(models.Model):
 
 class Location(models.Model):
     location_name = models.CharField(max_length=200, unique=True)
-    image = models.ImageField(upload_to="images", null=True)
+    image = models.ImageField(upload_to="images", null=True, blank=True)
     
     def __str__(self):
         return self.location_name
