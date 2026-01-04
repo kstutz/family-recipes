@@ -15,11 +15,19 @@
 </p>
 
 <h3>Hier ist es zu finden:</h3>
-{{ ingredient.location }}
+{{ ingredient.location1 }}
 <br />
 
-{% if ingredient.location.image %}
-    <img src="{{ ingredient.location.image.url }}" alt="{{ location }}" style="max-width: 400px; height: auto;">
-{% else %}
-    Kein Bild des Lagerorts hinterlegt
+{% if ingredient.location1.image %}
+    <img src="{{ ingredient.location1.image.url }}" alt="{{ location }}" style="max-width: 400px; height: auto;">
+{% endif %}
+
+{% if ingredient.location2 %}
+    <h3>oder hier:</h3>
+    {{ ingredient.location2 }}
+    <br />
+
+    {% if ingredient.location2.image %}
+        <img src="{{ ingredient.location2.image.url }}" alt="{{ location }}" style="max-width: 400px; height: auto;">
+    {% endif %}
 {% endif %}

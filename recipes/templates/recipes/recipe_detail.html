@@ -1,7 +1,7 @@
 <h1> {{ recipe }} </h1>
 
 Quelle: {{ recipe.source }} <br>
-Vorbereitungszeit: {{ recipe.preparation_time }} <br>
+Zubereitungszeit: {{ recipe.preparation_time }} <br>
 Kochzeit: {{ recipe.cooking_time }} <br>
 Anmerkungen: {{ recipe.notes }} <br>
 Süß: {{ recipe.sweet }} <br>
@@ -17,7 +17,11 @@ Noch in Erprobung: {{ recipe.experimental }}
                     &nbsp; <span style="color: red;" title="Normalerweise nicht vorrätig.">&#9888;</span>
                 {% endif %}
                 &nbsp; - &nbsp;
-                <a href="{% url 'recipes:ingredient' step_ingredient.ingredient.id %}">{{ step_ingredient.ingredient.location.location_name}}</a>
+                <a href="{% url 'recipes:ingredient' step_ingredient.ingredient.id %}">{{ step_ingredient.ingredient.location1.location_name}}</a>
+                {% if step_ingredient.ingredient.location2 %}
+                    / <a href="{% url 'recipes:ingredient' step_ingredient.ingredient.id %}">{{ step_ingredient.ingredient.location2.location_name}}</a>
+                {% endif %}
+
                 {% if step_ingredient.alternatives != "" %}
                     &nbsp;
                     (ersetzbar durch {{ step_ingredient.alternatives }})
