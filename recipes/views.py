@@ -1,5 +1,6 @@
+from django.shortcuts import render
 from django.views import generic
-from .models import Recipe, StepIngredient, RecipeUtensil, Location, Ingredient, Utensil
+from .models import Recipe, StepIngredient, RecipeUtensil, Location, Ingredient, Utensil, RecipeFilter
 
 
 class IndexView(generic.ListView):
@@ -31,3 +32,8 @@ class IngredientView(generic.DetailView):
 
 class UtensilView(generic.DetailView):
     model = Utensil
+
+
+def recipe_list(request):
+    f = RecipeFilter(request.GET, queryset=Recipe.objects.all())
+    return render(request, 'recipes/recipe-list.html', {'filter': f})
