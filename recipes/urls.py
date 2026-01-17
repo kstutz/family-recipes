@@ -7,9 +7,7 @@ from . import views
 app_name = "recipes"
 urlpatterns = [
     # ex: /recipes/
-    path("", views.IndexView.as_view(), name="index"),
-    # ex: /recipes/list/
-    path('list/', views.recipe_list, name="recipe-list"),
+    path("", views.recipe_list, name="index"),
     # ex: /recipes/5/
     path("<int:pk>/", views.DetailView.as_view(), name="detail"),
     # ex: /recipes/utensil/2/

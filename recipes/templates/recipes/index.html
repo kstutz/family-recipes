@@ -2,12 +2,20 @@
 
 <link rel="stylesheet" href="{% static 'recipes/style.css' %}">
 
-{% if recipe_list %}
-    <ul>
-    {% for recipe in recipe_list %}
-        <li><a href="{% url 'recipes:detail' recipe.id %}">{{ recipe.recipe_name }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No Recipes are available.</p>
-{% endif %}
+{% block content %}
+    <form method="get">
+        {{ filter.form.as_p }}
+        <input type="submit" />
+    </form>
+
+    {% if filter.qs %}
+        <ul>
+        {% for recipe in filter.qs %}
+            <li><a href="{% url 'recipes:detail' recipe.id %}">{{ recipe.recipe_name }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No Recipes are available.</p>
+    {% endif %}
+
+{% endblock %}

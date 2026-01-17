@@ -36,4 +36,4 @@ class UtensilView(generic.DetailView):
 
 def recipe_list(request):
     f = RecipeFilter(request.GET, queryset=Recipe.objects.all())
-    return render(request, 'recipes/recipe-list.html', {'filter': f})
+    return render(request, 'recipes/index.html', {'filter': f})
