@@ -3,7 +3,15 @@
         {{ filter.form.as_p }}
         <input type="submit" />
     </form>
-    {% for obj in filter.qs %}
-        {{ obj.recipe_name }} - ${{ obj.sweet }}<br />
-    {% endfor %}
+
+    {% if filter.qs %}
+        <ul>
+        {% for recipe in filter.qs %}
+            <li><a href="{% url 'recipes:detail' recipe.id %}">{{ recipe.recipe_name }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No Recipes are available.</p>
+    {% endif %}
+
 {% endblock %}

@@ -74,6 +74,4 @@ class StepIngredient(models.Model):
 class RecipeFilter(django_filters.FilterSet):
     class Meta:
         model = Recipe
-        fields = ['sweet']
-
-    
+        fields = ['sweet', 'experimental']
