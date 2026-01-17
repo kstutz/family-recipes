@@ -13,5 +13,6 @@ python manage.py runserver
 -> admin front-end: http://127.0.0.1:8000/admin/
 
 To dump your local data into a fixture:
-python manage.py dumpdata --natural-foreign --natural-primary -e contenttypes -e admin -e auth.Permission --indent 2 > <your_fixture_name>.json
+python -Xutf8 manage.py dumpdata --natural-foreign --natural-primary -e contenttypes -e admin -e auth.Permission --indent 2 -o <your_fixture_name>.json
 -> the exclusions are important, otherwise you get IntegrityErrors when loading the data
+-> the -Xutf8 is also important (at least on Windows), otherwise we get Umlaut-Problems
