@@ -1,5 +1,6 @@
 from django.core.validators import MinValueValidator
 from django.db import models
+import django_filters
 
 
 class Recipe(models.Model):
@@ -63,10 +64,14 @@ class StepIngredient(models.Model):
     step = models.ForeignKey(Step, verbose_name="Schritt", on_delete=models.CASCADE)
     ingredient = models.ForeignKey(Ingredient, verbose_name="Zutat", on_delete=models.CASCADE)
     quantity = models.CharField(max_length=200, verbose_name="Menge")
-    unit = models.CharField(max_length=100, verbose_name="Einheit")
+    unit = models.CharField(max_length=100, verbose_name="Einheit", blank=True)
     alternatives = models.CharField(max_length=200, verbose_name="Mögliche Alternative(n)", blank=True)
 
     def __str__(self):
         return self.ingredient.ingredient_name
-
     
+    
+class RecipeFilter(django_filters.FilterSet):
+    class Meta:
+        model = Recipe
+        fields = ['sweet', 'experimental']

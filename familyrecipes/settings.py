@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'nested_admin',
+    'django_filters',
     'recipes.apps.RecipesConfig',
     'django.contrib.admin',
     'django.contrib.auth',

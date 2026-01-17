@@ -26,6 +26,19 @@
     }
   },
   {
+    "model": "recipes.recipe",
+    "pk": 3,
+    "fields": {
+      "recipe_name": "Crêpes",
+      "source": "",
+      "preparation_time": "1h",
+      "cooking_time": "",
+      "notes": "Die Zubereitungszeit hängt sehr stark davon ab, für wieviele Leute man Crêpes macht.",
+      "experimental": false,
+      "sweet": true
+    }
+  },
+  {
     "model": "recipes.location",
     "pk": 1,
     "fields": {
@@ -98,12 +111,64 @@
     }
   },
   {
+    "model": "recipes.location",
+    "pk": 11,
+    "fields": {
+      "location_name": "Linke Schublade",
+      "image": ""
+    }
+  },
+  {
+    "model": "recipes.location",
+    "pk": 12,
+    "fields": {
+      "location_name": "Schrank unter Kühlschrank",
+      "image": ""
+    }
+  },
+  {
     "model": "recipes.utensil",
     "pk": 1,
     "fields": {
       "utensil_name": "Rührgerät - Pürierstab",
       "location": 7,
       "image": "images/puerierstab.jpeg"
+    }
+  },
+  {
+    "model": "recipes.utensil",
+    "pk": 2,
+    "fields": {
+      "utensil_name": "Schneebesen aus Metall",
+      "location": 11,
+      "image": ""
+    }
+  },
+  {
+    "model": "recipes.utensil",
+    "pk": 3,
+    "fields": {
+      "utensil_name": "Pfannenwender",
+      "location": 11,
+      "image": ""
+    }
+  },
+  {
+    "model": "recipes.utensil",
+    "pk": 4,
+    "fields": {
+      "utensil_name": "Teigschüssel",
+      "location": 12,
+      "image": ""
+    }
+  },
+  {
+    "model": "recipes.utensil",
+    "pk": 5,
+    "fields": {
+      "utensil_name": "Suppenkelle (groß)",
+      "location": 11,
+      "image": ""
     }
   },
   {
@@ -144,6 +209,38 @@
     "fields": {
       "recipe": 2,
       "number": 2
+    }
+  },
+  {
+    "model": "recipes.step",
+    "pk": 6,
+    "fields": {
+      "recipe": 3,
+      "number": 1
+    }
+  },
+  {
+    "model": "recipes.step",
+    "pk": 7,
+    "fields": {
+      "recipe": 3,
+      "number": 2
+    }
+  },
+  {
+    "model": "recipes.step",
+    "pk": 8,
+    "fields": {
+      "recipe": 3,
+      "number": 3
+    }
+  },
+  {
+    "model": "recipes.step",
+    "pk": 9,
+    "fields": {
+      "recipe": 3,
+      "number": 4
     }
   },
   {
@@ -251,11 +348,115 @@
     }
   },
   {
+    "model": "recipes.instruction",
+    "pk": 14,
+    "fields": {
+      "step": 6,
+      "text": "Mehl in der Teigschüssel abwiegen"
+    }
+  },
+  {
+    "model": "recipes.instruction",
+    "pk": 15,
+    "fields": {
+      "step": 6,
+      "text": "Milch langsam zugeben, dabei mit dem Metall-Schneebesen immer rühren, bis Milch komplett vom Mehl aufgenommen worden ist"
+    }
+  },
+  {
+    "model": "recipes.instruction",
+    "pk": 16,
+    "fields": {
+      "step": 6,
+      "text": "so lange Milch reinrühren, bis ein dünnflüssiger Brei entstanden ist (braucht wahrscheinlich mehr Milch)"
+    }
+  },
+  {
+    "model": "recipes.instruction",
+    "pk": 17,
+    "fields": {
+      "step": 7,
+      "text": "Eier aufschlagen und reinrühren"
+    }
+  },
+  {
+    "model": "recipes.instruction",
+    "pk": 18,
+    "fields": {
+      "step": 7,
+      "text": "evtl. mehr Milch zugeben, wenn jetzt wieder zu dickflüssig"
+    }
+  },
+  {
+    "model": "recipes.instruction",
+    "pk": 19,
+    "fields": {
+      "step": 8,
+      "text": "Zucker und 1 Prise Salz reinrühren"
+    }
+  },
+  {
+    "model": "recipes.instruction",
+    "pk": 20,
+    "fields": {
+      "step": 9,
+      "text": "Öl in Pfanne erhitzen, mit Küchentuch in Pfanne verteilen"
+    }
+  },
+  {
+    "model": "recipes.instruction",
+    "pk": 21,
+    "fields": {
+      "step": 9,
+      "text": "Teig mit Suppenkelle in Pfanne geben, verteilen"
+    }
+  },
+  {
+    "model": "recipes.instruction",
+    "pk": 22,
+    "fields": {
+      "step": 9,
+      "text": "von beiden Seiten braun backen, zwischendrin mit Pfannenwender wenden"
+    }
+  },
+  {
     "model": "recipes.recipeutensil",
     "pk": 1,
     "fields": {
       "recipe": 1,
       "utensil": 1
+    }
+  },
+  {
+    "model": "recipes.recipeutensil",
+    "pk": 2,
+    "fields": {
+      "recipe": 3,
+      "utensil": 2
+    }
+  },
+  {
+    "model": "recipes.recipeutensil",
+    "pk": 3,
+    "fields": {
+      "recipe": 3,
+      "utensil": 4
+    }
+  },
+  {
+    "model": "recipes.recipeutensil",
+    "pk": 4,
+    "fields": {
+      "recipe": 3,
+      "utensil": 3
+    }
+  },
+  {
+    "model": "recipes.recipeutensil",
+    "pk": 5,
+    "fields": {
+      "recipe": 3,
+      "utensil": 5
     }
   },
   {
@@ -374,6 +575,66 @@
       "location1": 9,
       "location2": null,
       "image": "images/wasser.jpeg",
+      "usually_stocked": true,
+      "alternatives": ""
+    }
+  },
+  {
+    "model": "recipes.ingredient",
+    "pk": 11,
+    "fields": {
+      "ingredient_name": "Mehl",
+      "location1": 5,
+      "location2": null,
+      "image": "",
+      "usually_stocked": true,
+      "alternatives": ""
+    }
+  },
+  {
+    "model": "recipes.ingredient",
+    "pk": 12,
+    "fields": {
+      "ingredient_name": "Milch",
+      "location1": 8,
+      "location2": 5,
+      "image": "",
+      "usually_stocked": true,
+      "alternatives": ""
+    }
+  },
+  {
+    "model": "recipes.ingredient",
+    "pk": 13,
+    "fields": {
+      "ingredient_name": "Eier",
+      "location1": 1,
+      "location2": 8,
+      "image": "",
+      "usually_stocked": true,
+      "alternatives": ""
+    }
+  },
+  {
+    "model": "recipes.ingredient",
+    "pk": 14,
+    "fields": {
+      "ingredient_name": "Zucker",
+      "location1": 2,
+      "location2": 5,
+      "image": "",
+      "usually_stocked": true,
+      "alternatives": ""
+    }
+  },
+  {
+    "model": "recipes.ingredient",
+    "pk": 15,
+    "fields": {
+      "ingredient_name": "Öl",
+      "location1": 1,
+      "location2": null,
+      "image": "",
       "usually_stocked": true,
       "alternatives": ""
     }
@@ -500,11 +761,65 @@
     }
   },
   {
+    "model": "recipes.stepingredient",
+    "pk": 12,
+    "fields": {
+      "step": 6,
+      "ingredient": 11,
+      "quantity": "300",
+      "unit": "g",
+      "alternatives": ""
+    }
+  },
+  {
+    "model": "recipes.stepingredient",
+    "pk": 13,
+    "fields": {
+      "step": 6,
+      "ingredient": 12,
+      "quantity": "500",
+      "unit": "ml",
+      "alternatives": ""
+    }
+  },
+  {
+    "model": "recipes.stepingredient",
+    "pk": 14,
+    "fields": {
+      "step": 7,
+      "ingredient": 13,
+      "quantity": "4",
+      "unit": "St.",
+      "alternatives": ""
+    }
+  },
+  {
+    "model": "recipes.stepingredient",
+    "pk": 15,
+    "fields": {
+      "step": 8,
+      "ingredient": 14,
+      "quantity": "1",
+      "unit": "EL",
+      "alternatives": ""
+    }
+  },
+  {
+    "model": "recipes.stepingredient",
+    "pk": 16,
+    "fields": {
+      "step": 9,
+      "ingredient": 15,
+      "quantity": "1",
+      "unit": "TL",
+      "alternatives": ""
+    }
+  },
+  {
     "model": "auth.user",
-    "pk": 1,
     "fields": {
       "password": "pbkdf2_sha256$1200000$02Gc2gpkl9NNkr42lcm1ZE$DXyu5SDMnSJoyEja6ay/scgec1ycsdb5tCE5YfuJOaw=",
-      "last_login": "2025-12-23T22:36:22.959Z",
+      "last_login": "2026-01-13T21:51:23.396Z",
       "is_superuser": true,
       "username": "admin",
       "first_name": "",
@@ -515,6 +830,14 @@
       "date_joined": "2025-12-23T22:35:16.231Z",
       "groups": [],
       "user_permissions": []
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "0ijsrzm2c95c74lwxuy0kb6gm16j8zav",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAQBe_iGlmO4y8lPWewdtdeHECOFCcV4u4QKQW0b2beSyTY1pq2XpY0ZXEWgzj9bgj0KG0H-Q7tNkua27pMKHdFHrTL65zL83K4fwcVev3WYDBzGJXViKDIReTA7K2FyDiiV4q8Cd4M7CCSVp6dRSSlqZD1msX7AwCYOI8:1vfmIN:47GpafDHYJwTqrsdrhzplGlJP3BWlgKDo6Qfy6VqoZk",
+      "expire_date": "2026-01-27T21:51:23.401Z"
     }
   },
   {
