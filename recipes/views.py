@@ -4,10 +4,10 @@ from .models import Recipe, StepIngredient, RecipeUtensil, Location, Ingredient,
 
 
 class IndexView(generic.ListView):
-    template_name = "recipes/index.html"
+    template_name = "recipes/ingredient_list.html"
 
     def get_queryset(self):
-        return Recipe.objects.order_by("recipe_name")
+        return Ingredient.objects.order_by("ingredient_name")
 
 
 class DetailView(generic.DetailView):
