@@ -1,11 +1,18 @@
 from django.shortcuts import render
 from django.views import generic
+from django_filters.views import FilterView
+
 from .models import Recipe, StepIngredient, RecipeUtensil, Location, Ingredient, Utensil, RecipeFilter
 
 
-class IndexView(generic.ListView):
-    template_name = "recipes/ingredient_list.html"
+class RecipeFilterView(FilterView):
+    model = Recipe
+    template_name = 'recipes/index.html'
+    filterset_class = RecipeFilter
+    context_object_name = 'recipe_list'
 
+
+class IngredientListView(generic.ListView):
     def get_queryset(self):
         return Ingredient.objects.order_by("ingredient_name")
 
@@ -34,6 +41,3 @@ class UtensilView(generic.DetailView):
     model = Utensil
 
 
-def recipe_list(request):
-    f = RecipeFilter(request.GET, queryset=Recipe.objects.all())
-    return render(request, 'recipes/index.html', {'filter': f})
