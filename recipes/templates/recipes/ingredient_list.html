@@ -1,0 +1,13 @@
+
+<a href="{% url 'recipes:index' %}">Zurück zur Rezeptübersicht</a>
+
+{% if ingredient_list %}
+    <ul>
+    {% for ingredient in ingredient_list %}
+        <li><a href="{% url 'recipes:ingredient' ingredient.id %}">{{ ingredient.ingredient_name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No ingredients available.</p>
+{% endif %}
+

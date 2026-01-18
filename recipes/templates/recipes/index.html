@@ -2,6 +2,9 @@
 
 <link rel="stylesheet" href="{% static 'recipes/style.css' %}">
 
+
+<a href="{% url 'recipes:ingredient_list' %}">Zutatenübersicht</a>
+
 {% block content %}
     <form method="get">
         {{ filter.form.as_p }}
