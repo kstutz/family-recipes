@@ -8,6 +8,8 @@ app_name = "recipes"
 urlpatterns = [
     # ex: /recipes/
     path("", views.RecipeFilterView.as_view(), name="index"),
+    # ex: /recipes/recipesingredients/
+    path("recipesingredients/", views.RecipeIngredientFilterView.as_view(), name="recipes_ingredients"),
     # ex: /recipes/ingredients/
     path("ingredients/", views.IngredientListView.as_view(), name="ingredient_list"),
     # ex: /recipes/5/

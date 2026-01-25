@@ -75,3 +75,12 @@ class RecipeFilter(django_filters.FilterSet):
     class Meta:
         model = Recipe
         fields = ['sweet', 'experimental']
+        
+        
+class RecipeIngredientFilter(django_filters.FilterSet):
+    ingredient = django_filters.ModelChoiceFilter(queryset=Ingredient.objects.all(),
+                                                  field_name='step__stepingredient__ingredient', label='Zutat')
+
+    class Meta:
+        model = Recipe
+        fields = ['ingredient']
