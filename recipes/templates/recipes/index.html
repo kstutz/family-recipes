@@ -2,7 +2,8 @@
 
 <link rel="stylesheet" href="{% static 'recipes/style.css' %}">
 
-
+<a href="{% url 'recipes:recipes_ingredients' %}">Rezepte nach Zutaten filtern</a>
+<br />
 <a href="{% url 'recipes:ingredient_list' %}">Zutatenübersicht</a>
 
 {% block content %}

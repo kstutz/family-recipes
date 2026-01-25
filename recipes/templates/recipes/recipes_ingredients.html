@@ -1,0 +1,41 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'recipes/style.css' %}">
+
+<a href="{% url 'recipes:index' %}">Zurück zur Startseite</a>
+
+{% block content %}
+    <form method="get">
+        {{ filter.form.as_p }}
+        <input type="submit" />
+    </form>
+
+    {% if filter.qs %}
+        <ul>
+        {% for recipe in filter.qs %}
+            <li>
+                <a href="{% url 'recipes:detail' recipe.id %}">{{ recipe.recipe_name }}</a>
+                <ul>
+                    {% for ingredient in recipe.ingredients %}
+                        <li>
+                            <a href="{% url 'recipes:ingredient' ingredient.id %}">
+                                {{ ingredient.ingredient_name }}
+                            </a>
+                            {% if ingredient.usually_stocked %}
+                                <!-- Display a green checkmark -->
+                                &nbsp; <span style="color: green;" title="Normalerweise vorrätig.">&#10004;</span>
+                            {% else %}
+                                <!-- Display a warning sign -->
+                                &nbsp; <span style="color: red;" title="Normalerweise nicht vorrätig.">&#9888;</span>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No Recipes are available.</p>
+    {% endif %}
+
+{% endblock %}
